@@ -12,6 +12,7 @@
           name={"question_#{question.id}"}
           id={"question_#{question.id}_option_#{index}"}
           value={index}
+          onchange="updateProgressBar()"
         />
         <label
           class="form-check-label btn btn-outline-primary w-100 text-start py-2"
@@ -27,8 +28,21 @@
 </div>
 
 <div id="sticky-footer" class="row bg-light border-top px-5">
-  <progress id="progress" max="1" value="0"></progress>
+  <progress id="progress" max={length(@questions)} value="0"></progress>
   <button id="submit-button" class="mb-3 btn btn-primary col-12">
     Submit
   </button>
 </div>
+
+<script>
+  function updateProgressBar() {
+    let count = 0;
+
+    document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
+      count++;
+    });
+
+    const progressBar = document.getElementById("progress");
+    progressBar.setAttribute("value", count);
+  }
+</script>
