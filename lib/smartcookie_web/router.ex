@@ -42,22 +42,20 @@ defmodule SmartcookieWeb.Router do
 
   # Protected routes (require authentication)
   scope "/", SmartcookieWeb do
-    pipe_through [:browser, :require_authenticated_user]
+    # pipe_through [:browser, :require_authenticated_user]
+    pipe_through [:browser]
 
-    live_session :require_authenticated_user,
-      on_mount: [{SmartcookieWeb.UserAuth, :ensure_authenticated}] do
-      live "/users/settings", UserSettingsLive, :edit
-      live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
-    end
+    # live_session :require_authenticated_user,
+    #   on_mount: [{SmartcookieWeb.UserAuth, :ensure_authenticated}] do
+    #   live "/users/settings", UserSettingsLive, :edit
+    #   live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+    # end
 
     # Dashboard routes
     get "/dashboard", DashboardController, :index
 
     # Quiz routes
-    get "/questions", QuestionController, :index
-    get "/questions/:category", QuestionController, :category
-    get "/questions/view/:id", QuestionController, :show
-    get "/questions/:id/answer/:answer_index", QuestionController, :answer
+    get "/quiz", QuestionController, :quiz
   end
 
   scope "/", SmartcookieWeb do

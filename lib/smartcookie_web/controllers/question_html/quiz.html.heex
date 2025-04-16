@@ -1,0 +1,27 @@
+<!-- lib/smartcookie_web/controllers/question_html/category.html.heex -->
+<div class="max-w-2xl mx-auto p-6">
+  <div class="space-y-4">
+    <%= for question <- @questions do %>
+    <div class="question border p-3 mb-3 rounded">
+      <p><strong><%= question.question %></strong></p>
+      <%= for {option, index} <- Enum.with_index(question.options) do %>
+      <div class="form-check">
+        <input
+          class="form-check-input d-none"
+          type="radio"
+          name={"question_#{question.id}"}
+          id={"question_#{question.id}_option_#{index}"}
+          value={index}
+        />
+        <label
+          class="form-check-label btn btn-outline-primary w-100 text-start py-2"
+          for={"question_#{question.id}_option_#{index}"}
+        >
+          <strong><%= <<65 + index>> %></strong>: <%= option %>
+        </label>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

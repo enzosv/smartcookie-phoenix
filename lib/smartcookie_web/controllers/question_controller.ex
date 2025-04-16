@@ -9,14 +9,9 @@ defmodule SmartcookieWeb.QuestionController do
     render(conn, :index, questions: questions)
   end
 
-  def category(conn, %{"category" => category}) do
-    questions = Quizzes.list_questions_by_category(category)
-    render(conn, :category, questions: questions, category: category)
-  end
-
-  def show(conn, %{"id" => id}) do
-    question = Quizzes.get_question!(id)
-    render(conn, :show, question: question)
+  def quiz(conn, _params) do
+    questions = Quizzes.list_questions()
+    render(conn, :quiz, questions: questions)
   end
 
   def answer(conn, %{"id" => id, "answer_index" => answer_index}) do
