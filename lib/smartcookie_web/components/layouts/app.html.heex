@@ -1,63 +1,14 @@
 <!-- lib/smartcookie_web/components/layouts/app.html.heex -->
-<header class="bg-white shadow">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-16">
-      <div class="flex">
-        <div class="flex-shrink-0 flex items-center">
-          <a href="/" class="text-2xl font-bold text-blue-600">SmartCookie</a>
-        </div>
-        <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-          <%= if @current_user do %>
-            <a href={~p"/dashboard"} class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-              Dashboard
-            </a>
-            <a href={~p"/questions"} class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-              Quizzes
-            </a>
-          <% end %>
-        </div>
-      </div>
-      <div class="hidden sm:ml-6 sm:flex sm:items-center">
-        <%= if @current_user do %>
-          <div class="flex items-center">
-            <span class="text-gray-700 mr-4"><%= @current_user.email %></span>
-            <.link
-              href={~p"/users/settings"}
-              class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Settings
-            </.link>
-            <.link
-              href={~p"/users/log_out"}
-              method="delete"
-              class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Log out
-            </.link>
-          </div>
-        <% else %>
-          <div>
-            <.link
-              href={~p"/users/register"}
-              class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Register
-            </.link>
-            <.link
-              href={~p"/users/log_in"}
-              class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Log in
-            </.link>
-          </div>
-        <% end %>
-      </div>
-    </div>
+<nav class="navbar navbar-expand navbar-light">
+  <div class="d-flex justify-content-start">
+    <.link class="nav-link me-3 fw-bold" href={~p"/quiz"}>Quiz</.link>
+    <.link class="nav-link me-3" href="daily.html">Flashcards</.link>
+    <.link class="nav-link" href="history.html">History</.link>
   </div>
-</header>
+</nav>
 
 <main>
-  <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+  <div class="container-md">
     <.flash_group flash={@flash} />
     <%= @inner_content %>
   </div>

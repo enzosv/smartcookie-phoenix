@@ -1,13 +1,13 @@
 <!-- lib/smartcookie_web/controllers/question_html/category.html.heex -->
 <div class="max-w-2xl mx-auto p-6">
-  <div class="space-y-4">
-    <%= for question <- @questions do %>
+  <div class="space-y-4 quiz-container">
+    <%= for {question, i} <- Enum.with_index(@questions) do %>
     <div class="question border p-3 mb-3 rounded">
-      <p><strong><%= question.question %></strong></p>
+      <p><strong><%= i+1 %>) <%= question.question %></strong></p>
       <%= for {option, index} <- Enum.with_index(question.options) do %>
       <div class="form-check">
         <input
-          class="form-check-input d-none"
+          class="btn-check"
           type="radio"
           name={"question_#{question.id}"}
           id={"question_#{question.id}_option_#{index}"}
@@ -24,4 +24,11 @@
     </div>
     <% end %>
   </div>
+</div>
+
+<div id="sticky-footer" class="row bg-light border-top px-5">
+  <progress id="progress" max="1" value="0"></progress>
+  <button id="submit-button" class="mb-3 btn btn-primary col-12">
+    Submit
+  </button>
 </div>
