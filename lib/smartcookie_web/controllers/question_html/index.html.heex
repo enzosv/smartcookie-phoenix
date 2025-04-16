@@ -1,0 +1,15 @@
+<!-- lib/smartcookie_web/controllers/question_html/index.html.heex -->
+<div class="max-w-2xl mx-auto p-6">
+  <h1 class="text-2xl font-bold mb-6">Quiz Categories</h1>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <%= for category <- format_categories(@questions) do %>
+      <a href={~p"/questions/#{category}"} class="block p-6 bg-white rounded-lg border shadow-md hover:bg-gray-100">
+        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 capitalize"><%= category %></h5>
+        <p class="font-normal text-gray-700">
+          <%= length(Enum.filter(@questions, &(&1.category == category))) %> questions
+        </p>
+      </a>
+    <% end %>
+  </div>
+</div>

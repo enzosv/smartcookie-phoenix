@@ -1,0 +1,49 @@
+<!-- lib/smartcookie_web/controllers/page_html/home.html.heex -->
+<div class="flex flex-col items-center justify-center py-12">
+  <h1 class="text-4xl font-bold text-center mb-6">Welcome to SmartCookie</h1>
+  <p class="text-xl text-center text-gray-700 mb-8 max-w-2xl">
+    Test your knowledge with our interactive quizzes on various topics!
+  </p>
+  
+  <div class="flex flex-col sm:flex-row gap-4 justify-center">
+    <%= if @current_user do %>
+      <.link href={~p"/questions"} class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">
+        Browse Quizzes
+      </.link>
+      <.link href={~p"/dashboard"} class="px-6 py-3 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-300">
+        View Dashboard
+      </.link>
+    <% else %>
+      <.link href={~p"/users/register"} class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">
+        Sign Up
+      </.link>
+      <.link href={~p"/users/log_in"} class="px-6 py-3 bg-gray-200 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-300">
+        Log In
+      </.link>
+    <% end %>
+  </div>
+  
+  <div class="mt-16 max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold text-center mb-8">How It Works</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="text-center p-6 bg-white rounded-lg shadow-md">
+        <div class="text-3xl font-bold text-blue-600 mb-4">1</div>
+        <h3 class="text-xl font-semibold mb-2">Create an Account</h3>
+        <p class="text-gray-600">Sign up to track your progress and save your scores.</p>
+      </div>
+      
+      <div class="text-center p-6 bg-white rounded-lg shadow-md">
+        <div class="text-3xl font-bold text-blue-600 mb-4">2</div>
+        <h3 class="text-xl font-semibold mb-2">Take Quizzes</h3>
+        <p class="text-gray-600">Choose from various quiz categories and test your knowledge.</p>
+      </div>
+      
+      <div class="text-center p-6 bg-white rounded-lg shadow-md">
+        <div class="text-3xl font-bold text-blue-600 mb-4">3</div>
+        <h3 class="text-xl font-semibold mb-2">Track Progress</h3>
+        <p class="text-gray-600">See your scores and improve over time.</p>
+      </div>
+    </div>
+  </div>
+</div>

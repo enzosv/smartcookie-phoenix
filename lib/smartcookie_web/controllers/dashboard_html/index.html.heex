@@ -1,0 +1,53 @@
+<!-- lib/smartcookie_web/controllers/dashboard_html/index.html.heex -->
+<div class="max-w-4xl mx-auto p-6">
+  <h1 class="text-2xl font-bold mb-6">Your Dashboard</h1>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="p-6 bg-white rounded-lg border shadow-md">
+      <h2 class="text-xl font-semibold mb-2">Overall Score</h2>
+      <div class="text-4xl font-bold text-blue-600">
+        <%= @overall_stats.correct %> / <%= @overall_stats.total %>
+      </div>
+      <p class="text-gray-500">
+        <%= score_percentage(@overall_stats) %>% correct
+      </p>
+    </div>
+    
+    <div class="p-6 bg-white rounded-lg border shadow-md">
+      <h2 class="text-xl font-semibold mb-2">Categories Attempted</h2>
+      <div class="text-4xl font-bold text-green-600">
+        <%= length(@category_stats) %>
+      </div>
+    </div>
+    
+    <div class="p-6 bg-white rounded-lg border shadow-md">
+      <h2 class="text-xl font-semibold mb-2">Questions Answered</h2>
+      <div class="text-4xl font-bold text-purple-600">
+        <%= @overall_stats.total %>
+      </div>
+    </div>
+  </div>
+  
+  <h2 class="text-xl font-bold mb-4">Performance by Category</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <%= for {category, stats} <- @category_stats do %>
+      <div class="p-6 bg-white rounded-lg border shadow-md">
+        <h3 class="text-lg font-semibold mb-2 capitalize"><%= category %></h3>
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-2xl font-bold">
+              <%= stats.correct %> / <%= stats.total %>
+            </p>
+            <p class="text-gray-500">
+              <%= score_percentage(stats) %>% correct
+            </p>
+          </div>
+          <a href={~p"/questions/#{category}"} class="text-blue-600 hover:text-blue-800">
+            Take Quiz
+          </a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
