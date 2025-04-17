@@ -1,6 +1,8 @@
-<!-- lib/smartcookie_web/controllers/question_html/category.html.heex -->
-<div class="max-w-2xl mx-auto p-6">
+<!-- lib/smartcookie_web/controllers/question_html/quiz.html.heex -->
+<.form for={%{}} action={~p"/submit"} method="post">
+<div class="max-w-2xl mx-auto p-6 mb-5">
   <div class="space-y-4 quiz-container">
+    
     <%= for {question, i} <- Enum.with_index(@questions) do %>
     <div class="question border p-3 mb-3 rounded">
       <p><strong><%= i+1 %>) <%= question.question %></strong></p>
@@ -22,17 +24,23 @@
         </label>
       </div>
       <% end %>
+    
     </div>
     <% end %>
   </div>
 </div>
+<div class="my-5">
+  .
+</div>
 
-<div id="sticky-footer" class="row bg-light border-top px-5">
+
+<div id="sticky-footer" class="row bg-light border-top px-5 mt-3">
   <progress id="progress" max={length(@questions)} value="0"></progress>
-  <button id="submit-button" class="mb-3 btn btn-primary col-12">
+  <button type="submit" id="submit-button" class="mb-3 btn btn-primary col-12">
     Submit
   </button>
 </div>
+</.form>
 
 <script>
   function updateProgressBar() {

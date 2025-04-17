@@ -3,6 +3,7 @@ defmodule SmartcookieWeb.QuestionController do
   use SmartcookieWeb, :controller
   alias Smartcookie.Quizzes
   alias Smartcookie.Quizzes.Question
+  alias Smartcookie.Quizzes.Attempt
 
   def index(conn, _params) do
     questions = Quizzes.list_questions()
@@ -12,6 +13,29 @@ defmodule SmartcookieWeb.QuestionController do
   def quiz(conn, _params) do
     questions = Quizzes.list_questions()
     render(conn, :quiz, questions: questions)
+  end
+
+  def submit(conn, params) do
+    # Save the attempt
+    {:ok, attempt} =
+      %Smartcookie.Quizzes.Attempt{user_id: 1}
+      |> Smartcookie.Repo.insert()
+
+    # Loop through submitted answers
+    answers =
+      params
+      |> Enum.filter(fn {k, _v} -> String.starts_with?(k, "question_") end)
+      |> Enum.map(fn {"question_" <> id, answer_index} ->
+        %{
+          attempt_id: attempt.id,
+          question_id: String.to_integer(id),
+          answer_index: String.to_integer(answer_index)
+        }
+      end)
+
+    Smartcookie.Repo.insert_all(Smartcookie.Quizzes.Answer, answers)
+
+    redirect(conn, to: "/quiz")
   end
 
   def answer(conn, %{"id" => id, "answer_index" => answer_index}) do

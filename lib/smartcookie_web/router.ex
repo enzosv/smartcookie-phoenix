@@ -56,6 +56,7 @@ defmodule SmartcookieWeb.Router do
 
     # Quiz routes
     get "/quiz", QuestionController, :quiz
+    post "/submit", QuestionController, :submit
   end
 
   scope "/", SmartcookieWeb do
