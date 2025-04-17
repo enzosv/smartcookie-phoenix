@@ -41,10 +41,13 @@ defmodule Smartcookie.Quizzes do
     Question.changeset(question, attrs)
   end
 
+  # Attempt functions
+  def get_attempt!(id), do: Repo.get!(Attempt, id)
+
   # Answer functions
 
-  def list_user_answers(user_id) do
-    from(a in Answer, where: a.user_id == ^user_id)
+  def list_attempt_answers(attempt_id) do
+    from(a in Answer, where: a.attempt_id == ^attempt_id)
     |> Repo.all()
     |> Repo.preload(:question)
   end

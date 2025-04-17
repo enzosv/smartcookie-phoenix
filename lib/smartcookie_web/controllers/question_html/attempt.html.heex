@@ -1,0 +1,23 @@
+<!-- lib/smartcookie_web/controllers/question_html/attempt.html.heex -->
+<div class="max-w-2xl mx-auto p-6 mb-5">
+  <div class="space-y-4 quiz-container">
+    <%= for {answer, i} <- Enum.with_index(@answers) do %>
+    <div class="question border p-3 mb-3 rounded">
+      <p><strong><%= i+1 %>) <%= answer.question.question %></strong></p>
+      <%= for {option, index} <- Enum.with_index(answer.question.options) do %>
+      <div class="form-check">
+        <input type="radio" name={"question_#{answer.question.id}"}
+        value={index} id={"q#{answer.question.id}_#{index}"} class="btn-check
+        {answer.question.correct_answer == index ? btn-success}"
+        checked={answer.answer_index == index} />
+        <label
+          class="form-check-label btn btn-outline-primary w-100 text-start py-2"
+        >
+          <strong><%= <<65 + index>> %></strong>: <%= option %>
+        </label>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

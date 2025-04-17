@@ -9,8 +9,6 @@ defmodule Smartcookie.Quizzes.Answer do
     field :answer_index, :integer
     belongs_to :question, Question
     belongs_to :attempt, Attempt
-
-    timestamps()
   end
 
   def changeset(answer, attrs) do
